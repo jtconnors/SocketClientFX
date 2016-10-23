@@ -11,5 +11,6 @@ https://github.com/jtconnors/com.jtconnors.socket.git
 
 See also:
 
-SocketServerFX: https://github.com/jtconnors/SocketServerFX.git
-MultiSocketServerFX: https://github.com/jtconnors/MultiSocketServerFX.git
+- SocketServerFX: https://github.com/jtconnors/SocketServerFX.git
+
+- MultiSocketServerFX: https://github.com/jtconnors/MultiSocketServerFX.git
