@@ -29,7 +29,7 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package socketfx;
+package com.jtconnors.socketfx;
 
 import com.jtconnors.socket.Constants;
 import com.jtconnors.socket.DebugFlags;

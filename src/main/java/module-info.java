@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-module SocketClientFX {
+module socketclientfx {
     requires com.jtconnors.socket;
     requires java.base;
     requires java.logging;
@@ -12,6 +12,6 @@ module SocketClientFX {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
-    exports socketclientfx;
-    opens socketclientfx to javafx.fxml;
+    exports com.jtconnors.socketclientfx;
+    opens com.jtconnors.socketclientfx to javafx.fxml;
 }
