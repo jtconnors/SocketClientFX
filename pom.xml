@@ -65,45 +65,15 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.6</version>
-                <executions>
-                    <execution>
-                        <id>unpack-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>unpack-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <excludeScope>system</excludeScope>
-                            <excludeGroupIds>junit,org.mockito,org.hamcrest</excludeGroupIds>
-                            <outputDirectory>${project.build.directory}/classes</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.1</version>
-                <executions>
-                    <execution>
-                        <id>default-jar</id>
-                        
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <configuration>
-                            <archive>
-                                <index>false</index>
-                                <manifest>
-                                    <mainClass>com.jtconnors.socketclientfx.SocketClientFX</mainClass>
-                                </manifest>
-                            </archive>
-                        </configuration>  
-                    </execution>
-                </executions>   
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.jtconnors.socketclientfx.SocketClientFX</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -111,23 +81,15 @@
                 <version>1.6.0</version>
                 <executions>
                     <execution>
-                        <id>default-cli</id>
                         <goals>
-                            <goal>exec</goal>                            
+                            <goal>java</goal>
                         </goals>
-                        <configuration>
-                            <executable>${java.home}/bin/java</executable>
-                            <mainClass>com.jtconnors.socketclientfx.SocketClientFX</mainClass>
-                            <arguments>
-                                <argument>--module-path</argument>
-                                <modulepath/>
-                                <argument>--module</argument>
-                                <argument>socketclientfx/com.jtconnors.socketclientfx.SocketClientFX</argument>
-                            </arguments>
-                        </configuration>
                     </execution>
-                </executions>  
-            </plugin>         
+                </executions>
+                <configuration>
+                    <mainClass>com.jtconnors.socketclientfx.SocketClientFX</mainClass>
+                </configuration>
+            </plugin>   
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
