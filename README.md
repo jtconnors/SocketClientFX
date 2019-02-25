@@ -24,11 +24,14 @@ Of note, the following maven goals can be executed:
    - ```mvn package``` - to create the ```SocketClientFX``` module as a jar file
    - ```mvn exec:java``` to run the application
    
-Furthermore, 3 additional ```.BAT``` files are provided:
-   - ```run.bat``` - batch file to run the applications from the module path
-   - ```run-simplified.bat``` - alternative batch file to run the application, determines main class from ```SocketClientFX``` module
-   - ```link.bat``` - creates a runtime image using the ```jlink``` utility
-   
+Furthermore, additional ```..sh and .bat``` files are provided in the ```sh/```
+and ```bat/``` directories respectively:
+   - ```sh/run.sh``` or ```bat\run.bat``` - script/bat file to run the application from the module path
+   - ```sh/run-simplified.sh``` or ```bat\run-simplified.bat``` - alternative script/bat file to run the application, determines main class from ```SocketClientFX``` module
+   - ```sh/link.sh``` or ```bat\link.bat``` - creates a runtime image using the ```jlink``` utility
+   - ```sh/create-image.sh``` or ```bat\create-image.bat``` - creates a native package image of application using JEP-343 jpackage tool
+   - ```sh/create-installer.sh``` or ```bat\create-iinstaller.bat``` - creates a native package installer of application using JEP-343 jpackage tool
+
 Note:  these scripts will have to be slightly modified to account for where they are ultimately placed in your filesystem
    
 See also:

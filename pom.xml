@@ -60,6 +60,12 @@
                         <fileset>
                             <directory>image</directory>
                         </fileset>
+                        <fileset>
+                            <directory>appimage</directory>
+                        </fileset>
+                        <fileset>
+                            <directory>installer</directory>
+                        </fileset>
                     </filesets>
                 </configuration>
             </plugin>
