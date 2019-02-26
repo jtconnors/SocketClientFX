@@ -10,7 +10,7 @@ This application is written in Java using the JavaFX API.  It represents the cli
 
 It is typically used in conjucntion with one of two server-side JavaFX UI applications:
 ```SocketServerFX``` (https://github.com/jtconnors/SocketServerFX)
-                               - or -
+or
 ```MultiSocketServerFX``` https://github.com/jtconnors/MultiSocketServerFX
 
 This latest version of the source code is tagged ```1.0-JDK11-maven```.  It is modularized and as its name suggests, works with JDK11
@@ -24,15 +24,17 @@ Of note, the following maven goals can be executed:
    - ```mvn package``` - to create the ```SocketClientFX``` module as a jar file
    - ```mvn exec:java``` to run the application
    
-Furthermore, additional ```..sh and .bat``` files are provided in the ```sh/```
-and ```bat/``` directories respectively:
-   - ```sh/run.sh``` or ```bat\run.bat``` - script/bat file to run the application from the module path
-   - ```sh/run-simplified.sh``` or ```bat\run-simplified.bat``` - alternative script/bat file to run the application, determines main class from ```SocketClientFX``` module
-   - ```sh/link.sh``` or ```bat\link.bat``` - creates a runtime image using the ```jlink``` utility
-   - ```sh/create-image.sh``` or ```bat\create-image.bat``` - creates a native package image of application using JEP-343 jpackage tool
-   - ```sh/create-installer.sh``` or ```bat\create-iinstaller.bat``` - creates a native package installer of application using JEP-343 jpackage tool
+Furthermore, additional ```.sh``` and ```.ps1``` files are provided in the ```sh/```
+and ```ps1/``` directories respectively:
+   - ```sh/run.sh``` or ```ps1\run.ps1``` - script file to run the application from the module path
+   - ```sh/run-simplified.sh``` or ```ps1\run-simplified.ps1``` - alternative script file to run the application, determines main class from ```SocketClientFX``` module
+   - ```sh/link.sh``` or ```ps1\link.ps1``` - creates a runtime image using the ```jlink``` utility
+   - ```sh/create-image.sh``` or ```ps1\create-image.ps1``` - creates a native package image of application using JEP-343 jpackage tool
+   - ```sh/create-installer.sh``` or ```ps1\create-installer.ps1``` - creates a native package installer of application using JEP-343 jpackage tool
 
-Note:  these scripts will have to be slightly modified to account for where they are ultimately placed in your filesystem
+Notes:
+   - These scripts include an ```env.sh``` or ```env.ps1``` which may need to be slightly modified to account for where they are ultimately placed in your filesystem
+   - In order to generate ```EXE``` or ```MSI``` installers for Windows, ISSC and/or WiX toolkits must be installed respectively and placed on the %PATH% variable.
    
 See also:
 
