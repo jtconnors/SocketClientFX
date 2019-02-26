@@ -6,24 +6,16 @@
 PROJECT=SocketClientFX
 PROJECTDIR=~/NetBeansProjects/$PROJECT
 
-if [ ! -d $PROJECTDIR ]
-then
-	echo Project Directory "$PROJECTDIR" does not exist
-	exit 1
-fi
-
-cd $PROJECTDIR
-
 #
 # Location of JDK with jpackage utility
 #
 JPACKAGE_HOME=~/Downloads/jdk-13.jdk/Contents/Home
 
-if [ ! -d $JPACKEAGE_HOME ]
-then
-	echo jpackage home "$JPACKEAGE_HOME" does not exist
-	exit 1
-fi
+#
+# native platform
+#
+PLATFORM=mac
+INSTALLER_TYPE=dmg
 
 #
 # Application specific variables
@@ -39,13 +31,7 @@ LAUNCHER=$PROJECT
 REPO=~/.m2/repository
 
 #
-# native platform
-#
-PLATFORM=mac
-INSTALLER_TYPE=dmg
-
-#
-# Directory under which  maven places compiled classes and build jars
+# Directory under which maven places compiled classes and built jars
 #
 TARGET=target
 
@@ -80,23 +66,57 @@ EXTERNAL_MODULES=(
 )
 
 #
-# Process command-line arguments:
+# Function to print command-line options to standard output
 #
-#   -v 	--verbose flag for jdk commands that will accept it
+print_options() {
+	echo usage: $0 [-?,--help,-e,-n,-v]
+	echo -e "\t-? or --help - print options to standard output and exit"
+	echo -e "\t-e - echo the jdk command invocations to standard output"
+	echo -e "\t-n - don't run the java commands, just print out invocations"
+	echo -e "\t-v - --verbose flag for jdk commands that will accept it"
+	echo
+}
+
+#
+# Process command-line arguments:  Not all flags are vaild for all invocations,
+# but we'll parse them anyway.
+#
+#   -? or --help  print options to standard output and exit
 #   -e	echo the jdk command invocations to standard output
+#   -n  don't run the java commands, just print out invocations
+#   -v 	--verbose flag for jdk commands that will accept it
 #
 VERBOSE_OPTION=""
 ECHO_CMD=false
+EXECUTE_OPTION=true
 
 for i in $*
 do
-	if [ "$i" = "-v" ]
-	then
-		VERBOSE_OPTION="--verbose"
-	elif [ "$i" = "-e" ]
-	then
-		ECHO_CMD=true
-	fi
+	case $i in
+		"-?")
+			print_options
+			exit 0
+			;;
+		"--help")
+			print_options
+			exit 0
+			;;
+		"-e")
+			ECHO_CMD=true
+			;;
+		"-n")
+			ECHO_CMD=true
+			EXECUTE_OPTION=false
+			;;
+		"-v")
+			VERBOSE_OPTION="--verbose"
+			;;
+                *)
+			echo "$0: bad option '$i'"
+			print_options
+			exit 1
+			;;
+	esac
 done
 
 #
@@ -108,5 +128,28 @@ exec_cmd() {
 	then
 		echo $*
 	fi
-	eval $*
+        if [ "$EXECUTE_OPTION" = "true" ]
+	then
+		eval $*
+	fi
 }
+
+#
+# Check if $PROJECTDIR exists
+#
+if [ ! -d $PROJECTDIR ]
+then
+	echo Project Directory "$PROJECTDIR" does not exist
+	exit 1
+fi
+
+#
+# Check if $JPACKAGE_HOME exists
+#
+if [ ! -d $JPACKAGE_HOME ]
+then
+	echo jpackage home "$JPACKEAGE_HOME" does not exist
+	exit 1
+fi
+
+cd $PROJECTDIR

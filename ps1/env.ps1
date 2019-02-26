@@ -66,8 +66,8 @@ Set-Variable -Name EXTERNAL_MODULES -Value @(
 )
 
 #
-# Process command-line arguments:  Not all flags are vaild for all invocations, but we'll parse them
-# anyway.
+# Process command-line arguments:  Not all flags are vaild for all invocations,
+# but we'll parse them anyway.
 #
 #   -e	echo the jdk command invocations to standard output
 #   -n  don't run the java commands, just print out invocations

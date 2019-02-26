@@ -32,5 +32,4 @@ JARCMD="jar --main-class $MAINCLASS --update --file $TARGET/$MAINJAR"
 exec_cmd $JARCMD
 echo
 
-CMD="java --module-path $MODPATH -m $MAINMODULE/$MAINCLASS"
-exec_cmd $CMD
+exec_cmd "java --module-path $MODPATH -m $MAINMODULE/$MAINCLASS"

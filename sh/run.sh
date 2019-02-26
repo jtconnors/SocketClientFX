@@ -27,5 +27,4 @@ do
     MODPATH=${MODPATH}":""${EXTERNAL_MODULES[$i]}"
 done
 
-CMD="java --module-path $MODPATH -m $MAINMODULE/$MAINCLASS"
-exec_cmd $CMD
+exec_cmd "java --module-path $MODPATH -m $MAINMODULE/$MAINCLASS"
