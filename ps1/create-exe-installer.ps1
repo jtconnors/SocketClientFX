@@ -47,3 +47,4 @@ Exec-Cmd("$JPACKAGE_HOME\bin\jpackage.exe", $JPACKAGE_ARGS)
 #
 # Return to the original directory
 #
+cd $STARTDIR
