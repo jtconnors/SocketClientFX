@@ -25,7 +25,7 @@ done
 # Have to manually specify main class via jar --update until
 # maven-jar-plugin 3.1.2+ is released
 if [ ! -f $TARGET/$MAINJAR ] ; then
-	echo "Did you run 'mvn jar:package' first?"
+	echo "Did you run 'mvn package' first?"
 	exit 1
 fi
 JARCMD="jar --main-class $MAINCLASS --update --file $TARGET/$MAINJAR"

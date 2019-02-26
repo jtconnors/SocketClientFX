@@ -29,17 +29,15 @@ if ($Global:JUST_EXIT -eq "true") {
 # Run the Java command
 #
 Set-Variable -Name JPACKAGE_ARGS -Value @(
-    'create-image',
-    '--runtime-image',
-    """$IMAGE""",
-    "--input",
-    """$TARGET""",
+    'create-installer',
+    "--installer-type",
+    'exe',
     '--output',
-    """$APPIMAGE""",
+    """$INSTALLER""",
+    '--app-image',
+    """$APPIMAGE/$LAUNCHER""",
     '--name',
-    """$LAUNCHER""",
-    '--main-jar',
-    """$MAINJAR"""
+    """$LAUNCHER"""
 )
 if ($VERBOSE_OPTION -ne $null) {
    $JPACKAGE_ARGS += '--verbose'
@@ -49,4 +47,3 @@ Exec-Cmd("$JPACKAGE_HOME\bin\jpackage.exe", $JPACKAGE_ARGS)
 #
 # Return to the original directory
 #
-cd $STARTDIR

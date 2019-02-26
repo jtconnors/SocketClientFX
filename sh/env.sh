@@ -78,7 +78,7 @@ print_options() {
 }
 
 #
-# Process command-line arguments:  Not all flags are vaild for all invocations,
+# Process command-line arguments:  Not all flags are valid for all invocations,
 # but we'll parse them anyway.
 #
 #   -? or --help  print options to standard output and exit
@@ -121,11 +121,12 @@ done
 
 #
 # Function to execute command specified by arguments.  If $ECHO_CMD is true
-# then print the commant out to standard ouitput first.
+# then print the command out to standard output first.
 #
 exec_cmd() {
 	if [ "$ECHO_CMD" = "true" ]
 	then
+		echo
 		echo $*
 	fi
         if [ "$EXECUTE_OPTION" = "true" ]
@@ -148,7 +149,7 @@ fi
 #
 if [ ! -d $JPACKAGE_HOME ]
 then
-	echo jpackage home "$JPACKEAGE_HOME" does not exist
+	echo jpackage home "$JPACKAGE_HOME" does not exist
 	exit 1
 fi
 

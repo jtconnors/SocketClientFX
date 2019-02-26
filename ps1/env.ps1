@@ -65,50 +65,81 @@ Set-Variable -Name EXTERNAL_MODULES -Value @(
     "$REPO\org\openjfx\javafx-graphics\11.0.1\javafx-graphics-11.0.1-$PLATFORM.jar"
 )
 
+Set-Variable -Name SCRIPT_NAME -Value $MyInvocation.MyCommand.Name
+
 #
-# Process command-line arguments:  Not all flags are vaild for all invocations,
+# Function to print command-line options to standard output
+#
+function Print-Options {
+    Write-Output "usage: ${SCRIPT_NAME} [-?,--help,-e,-n,-v]"
+    Write-Output "  -? or --help - print options to standard output and exit"
+    Write-Output "  -e - echo the jdk command invocations to standard output"
+    Write-Output "  -n - don't run the java commands, just print out invocations"
+    Write-Output "  -v - --verbose flag for jdk commands that will accept it"
+}
+
+#
+# Process command-line arguments:  Not all flags are valid for all invocations,
 # but we'll parse them anyway.
 #
+#   -? or --help  print options to standard output and exit
 #   -e	echo the jdk command invocations to standard output
 #   -n  don't run the java commands, just print out invocations
 #   -v 	--verbose flag for jdk commands that will accept it
-#   -exe generate an EXE installer type for Windows
-#   -msi generate an MSI installer type for Windows
 #
 Set-Variable -Name VERBOSE_OPTION -Value $null
 Set-Variable -Name ECHO_CMD -Value false
 Set-Variable -Name EXECUTE_OPTION -Value true
+Set-Variable -Name JUST_EXIT -Value false -Scope Global
 
-    Foreach ($arg in $CMDLINE_ARGS) {
-        switch ($arg) {
-            '-e' { 
-                Set-Variable -Name ECHO_CMD -Value true   
-            }
-            '-n' { 
-                Set-Variable -Name ECHO_CMD -Value true
-                Set-Variable -Name EXECUTE_OPTION -Value false   
-            }
-            '-v' {
-                Set-Variable -Name VERBOSE_OPTION -Value "--verbose"
-            }
-            '-exe' {
-                Set-Variable -Name INSTALLER_TYPE -Value exe
-            }
-            '-msi' {
-                Set-Variable -Name INSTALLER_TYPE -Value msi
-            }
+
+Foreach ($arg in $CMDLINE_ARGS) {
+    switch ($arg) {
+        '-?' {
+            Print-Options
+            Set-Variable -Name JUST_EXIT -Value true -Scope Global 
+        }
+        '--help' {
+            Print-Options
+            Set-Variable -Name JUST_EXIT -Value true -Scope Global
+        }
+        '-e' { 
+            Set-Variable -Name ECHO_CMD -Value true   
+        }
+        '-n' { 
+            Set-Variable -Name ECHO_CMD -Value true
+            Set-Variable -Name EXECUTE_OPTION -Value false   
+        }
+        '-v' {
+            Set-Variable -Name VERBOSE_OPTION -Value "--verbose"
+        }
+        default {
+            Write-Output "${SCRIPT_NAME}: bad option '$arg'"
+            Print-Options
+            Set-Variable -Name JUST_EXIT -Value true -Scope Global
         }
     }
+}
 
 #
 # Print a command with all its args on one line. 
 #
 function Print-Cmd {
+    Write-Output ""
     Foreach ($item in $args[0]) {
        $CMD += $item
        $CMD += " "
     }
     Write-Output $CMD
+}
+
+#
+# Function to print out an error message and exit with exitcode
+#
+function GoodBye($MSG, $EXITCODE) {
+   Write-Output $MSG
+   Set-Variable -Name JUST_EXIT -Value true -Scope Global
+   Exit $EXITCODE    
 }
 
 #
@@ -128,9 +159,6 @@ function Exec-Cmd {
     }
     if ($EXECUTE_OPTION -eq "true") {
         & $COMMAND $OPTIONS
-        if ($LASTEXITCODE -ne 0) {
-            Exit $LASTEXITCODE
-        }
     }
 }
 
@@ -138,24 +166,14 @@ function Exec-Cmd {
 # Check if $PROJECTDIR exists
 #
 if (-not (Test-Path $PROJECTDIR)) {
-    Set-Variable -Name SAVED_LASTEXITCODE -Value $LASTEXITCODE
-	Write-Output "Project Directory '$PROJECTDIR' does not exist"
-    if ($ORIGINALDIR -ne $null) {
-        cd $ORIGINALDIR
-    }
-	Exit $SAVED_LASTEXITCODE
+	GoodBye "Project Directory '$PROJECTDIR' does not exist" $LASTEXITCODE
 }
 
 #
 # Check if $JPACKAGE_HOME exists
 #
 if (-not (Test-Path $JPACKAGE_HOME)) {
-    Set-Variable -Name SAVED_LASTEXITCODE -Value $LASTEXITCODE
-	Write-Output "jpackage home '$JPACKAGE_HOME' does not exist"
-    if ($ORIGINALDIR -ne $null) {
-        cd $ORIGINALDIR
-    }
-    Exit $SAVED_LASTEXITCODE
+	GoodBye "jpackage home '$JPACKAGE_HOME' does not exist" $LASTEXITCODE 
 }
 
 cd $PROJECTDIR
