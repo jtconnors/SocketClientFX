@@ -166,14 +166,14 @@ function Exec-Cmd {
 # Check if $PROJECTDIR exists
 #
 if (-not (Test-Path $PROJECTDIR)) {
-	GoodBye "Project Directory '$PROJECTDIR' does not exist" $LASTEXITCODE
+	GoodBye " Project Directory '$PROJECTDIR' does not exist. Edit PROJECTDIR variable in ps1\env.ps1." $LASTEXITCODE
 }
 
 #
 # Check if $JPACKAGE_HOME exists
 #
 if (-not (Test-Path $JPACKAGE_HOME)) {
-	GoodBye "jpackage home '$JPACKAGE_HOME' does not exist" $LASTEXITCODE 
+	GoodBye "jpackage home '$JPACKAGE_HOME' does not exist. Edit JPACKAGE_HOME viariable in ps1\env.ps1." $LASTEXITCODE 
 }
 
 cd $PROJECTDIR

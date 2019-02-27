@@ -140,7 +140,7 @@ exec_cmd() {
 #
 if [ ! -d $PROJECTDIR ]
 then
-	echo Project Directory "$PROJECTDIR" does not exist
+	echo Project Directory "$PROJECTDIR" does not exist. Edit PROJECTDIR variable in sh/env.sh
 	exit 1
 fi
 
@@ -149,7 +149,7 @@ fi
 #
 if [ ! -d $JPACKAGE_HOME ]
 then
-	echo jpackage home "$JPACKAGE_HOME" does not exist
+	echo jpackage home "$JPACKAGE_HOME" does not exist. Edit JPACKAGE_HOME variable in sh/env.sh
 	exit 1
 fi
 

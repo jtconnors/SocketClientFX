@@ -35,7 +35,7 @@ and ```ps1\``` directories respectively:
    - ```ps1\create-msi-installer.ps1``` - creates a native Windows MSI installer of this application using JEP-343 jpackage tool
 
 Notes:
-   - These scripts have few available command-line options.  To print out
+   - These scripts have a few available command-line options.  To print out
 the options, add ```-?``` or ```--help``` as an argument to any script.
    - These scripts share common properties that can be found in ```env.sh``` or ```env.ps1```.  These may need to be slightly modified to match  your specific configuration.
    - In order to generate ```EXE``` or ```MSI``` installers for Windows, ISSC and/or WiX toolkits must be installed respectively and placed on the %PATH% variable.
