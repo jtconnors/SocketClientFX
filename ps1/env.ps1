@@ -10,7 +10,7 @@ Set-Variable -Name JPACKAGE_HOME -Value ~\Downloads\jdk-13
 # directory of the directory containining these script files houses
 # the maven project and source code.
 #
-PROJECTDIR=..
+Set-Variable -Name PROJECTDIR -Value ".."
 
 #
 # native platform
