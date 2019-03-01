@@ -1,15 +1,16 @@
 
 #
-# These variables must refer to the project name and the directory
-# in the filesystem where the project resides respectively
+# Location of JDK with jpackage utility.  We defult to the user's Download
+# directory.  If it's in a different place, this variable must be changed.
 #
-Set-Variable -Name PROJECT -Value SocketClientFX
-Set-Variable -Name PROJECTDIR -Value $HOME\Documents\NetBeansProjects\$PROJECT
+Set-Variable -Name JPACKAGE_HOME -Value ~\Downloads\jdk-13
 
 #
-# Location of JDK with jpackage utility
+# Unless these script files have been deliberately moved, the parent
+# directory of the directory containining these script files houses
+# the maven project and source code.
 #
-Set-Variable -Name JPACKAGE_HOME -Value \Users\jtconnor\Downloads\jdk-13
+PROJECTDIR=..
 
 #
 # native platform
@@ -20,6 +21,7 @@ Set-Variable -Name INSTALLER_TYPE -Value exe
 #
 # Application specific variables
 #
+Set-Variable -Name PROJECT -Value SocketClientFX
 Set-Variable -Name MAINMODULE -Value socketclientfx
 Set-Variable -Name MAINCLASS -Value com.jtconnors.socketclientfx.SocketClientFX
 Set-Variable -Name MAINJAR -Value SocketClientFX-11.0.jar
