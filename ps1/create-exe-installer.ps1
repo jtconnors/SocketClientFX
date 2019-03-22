@@ -25,19 +25,22 @@ if ($Global:JUST_EXIT -eq "true") {
 #
 ####################
 
+Set-Variable -Name INSTALLERTYPE -Value exe
+
 #
 # Run the Java command
 #
 Set-Variable -Name JPACKAGE_ARGS -Value @(
     'create-installer',
     "--installer-type",
+    """$INSTALLERTYPE""",
     'exe',
     '--output',
     """$INSTALLER""",
     '--app-image',
-    """$APPIMAGE/$LAUNCHER""",
+    """$APPIMAGE""",
     '--name',
-    """$LAUNCHER"""
+    """$INSTALLERNAME"""
 )
 if ($VERBOSE_OPTION -ne $null) {
    $JPACKAGE_ARGS += '--verbose'

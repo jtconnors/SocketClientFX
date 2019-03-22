@@ -22,9 +22,11 @@ INSTALLER_TYPE=dmg
 # Application specific variables
 #
 PROJECT=SocketClientFX
+VERSION=11.0
 MAINMODULE=socketclientfx
 MAINCLASS=com.jtconnors.socketclientfx.SocketClientFX
-MAINJAR=SocketClientFX-11.0.jar
+MAINJAR=$PROJECT-$VERSION.jar
+INSTALLERNAME=$PROJECT-$VERSION
 LAUNCHER=$PROJECT
 
 #
