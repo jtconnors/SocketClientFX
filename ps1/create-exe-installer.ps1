@@ -34,11 +34,10 @@ Set-Variable -Name JPACKAGE_ARGS -Value @(
     'create-installer',
     "--installer-type",
     """$INSTALLERTYPE""",
-    'exe',
     '--output',
     """$INSTALLER""",
     '--app-image',
-    """$APPIMAGE""",
+    """$APPIMAGE\$LAUNCHER""",
     '--name',
     """$INSTALLERNAME"""
 )

@@ -37,7 +37,7 @@ Set-Variable -Name JPACKAGE_ARGS -Value @(
     '--output',
     """$INSTALLER""",
     '--app-image',
-    """$APPIMAGE""",
+    """$APPIMAGE\$LAUNCHER""",
     '--name',
     """$INSTALLERNAME"""
 )
