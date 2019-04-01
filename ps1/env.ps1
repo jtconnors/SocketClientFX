@@ -16,7 +16,6 @@ Set-Variable -Name PROJECTDIR -Value ".."
 # native platform
 #
 Set-Variable -Name PLATFORM -Value win
-Set-Variable -Name INSTALLERTYPE -Value exe
 
 #
 # Application specific variables
@@ -25,7 +24,7 @@ Set-Variable -Name PROJECT -Value SocketClientFX
 Set-Variable -Name VERSION -Value "11.0"
 Set-Variable -Name MAINMODULE -Value socketclientfx
 Set-Variable -Name MAINCLASS -Value com.jtconnors.socketclientfx.SocketClientFX
-Set-Variable -Name MAINJAR -Value SocketClientFX-$VERSION.jar
+Set-Variable -Name MAINJAR -Value $PROJECT-$VERSION.jar
 Set-Variable -Name INSTALLERNAME -Value $PROJECT-$VERSION
 Set-Variable -Name LAUNCHER -Value $PROJECT
 

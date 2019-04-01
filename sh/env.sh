@@ -16,7 +16,6 @@ PROJECTDIR=..
 # native platform
 #
 PLATFORM=mac
-INSTALLER_TYPE=dmg
 
 #
 # Application specific variables

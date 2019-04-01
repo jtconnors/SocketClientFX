@@ -25,15 +25,13 @@ if ($Global:JUST_EXIT -eq "true") {
 #
 ####################
 
-Set-Variable -Name INSTALLERTYPE -Value msi
-
 #
 # Run the Java command
 #
 Set-Variable -Name JPACKAGE_ARGS -Value @(
     'create-installer',
     "--installer-type",
-    """$INSTALLERTYPE""",
+    'msi',
     '--output',
     """$INSTALLER""",
     '--app-image',
