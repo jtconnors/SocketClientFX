@@ -37,7 +37,9 @@ Set-Variable -Name JPACKAGE_ARGS -Value @(
     '--app-image',
     """$APPIMAGE\$LAUNCHER""",
     '--name',
-    """$INSTALLERNAME"""
+     """$LAUNCHER""",
+    '--app-version',
+    """$VERSION"""
 )
 if ($VERBOSE_OPTION -ne $null) {
    $JPACKAGE_ARGS += '--verbose'
