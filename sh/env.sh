@@ -1,9 +1,10 @@
 
 #
-# Location of JDK with jpackage utility.  We defult to the user's Download
-# directory.  If it's in a different place, this variable must be changed.
+# Location of JDK with jpackage utility. This is here for legacy reasons.
+# First prototype required a separate JDK build.  Starting with JDK 14,
+# it's built into the standard JDK.
 #
-JPACKAGE_HOME=~/Downloads/jdk-13.jdk/Contents/Home
+JPACKAGE_HOME=$JAVA_HOME
 
 #
 # Unless these script files have been deliberately moved, the parent
@@ -21,7 +22,7 @@ PLATFORM=mac
 # Application specific variables
 #
 PROJECT=SocketClientFX
-VERSION=11.0
+VERSION=14.0
 MAINMODULE=socketclientfx
 MAINCLASS=com.jtconnors.socketclientfx.SocketClientFX
 MAINJAR=$PROJECT-$VERSION.jar
@@ -58,15 +59,31 @@ INSTALLER=installer
 #
 EXTERNAL_MODULES=(
     "$REPO/com/jtconnors/com.jtconnors.socket/11.0.3/com.jtconnors.socket-11.0.3.jar"
-    "$REPO/org/openjfx/javafx-base/11.0.1/javafx-base-11.0.1.jar"
-    "$REPO/org/openjfx/javafx-controls/11.0.1/javafx-controls-11.0.1.jar"
-    "$REPO/org/openjfx/javafx-fxml/11.0.1/javafx-fxml-11.0.1.jar"
-    "$REPO/org/openjfx/javafx-graphics/11.0.1/javafx-graphics-11.0.1.jar"
-    "$REPO/org/openjfx/javafx-base/11.0.1/javafx-base-11.0.1-$PLATFORM.jar"
-    "$REPO/org/openjfx/javafx-controls/11.0.1/javafx-controls-11.0.1-$PLATFORM.jar"
-    "$REPO/org/openjfx/javafx-fxml/11.0.1/javafx-fxml-11.0.1-$PLATFORM.jar"
-    "$REPO/org/openjfx/javafx-graphics/11.0.1/javafx-graphics-11.0.1-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-base/14/javafx-base-14.jar"
+    "$REPO/org/openjfx/javafx-controls/14/javafx-controls-14.jar"
+    "$REPO/org/openjfx/javafx-fxml/14/javafx-fxml-14.jar"
+    "$REPO/org/openjfx/javafx-graphics/14/javafx-graphics-14.jar"
+    "$REPO/org/openjfx/javafx-base/14/javafx-base-14-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-controls/14/javafx-controls-14-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-fxml/14/javafx-fxml-14-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-graphics/14/javafx-graphics-14-$PLATFORM.jar"
 )
+
+#
+# Create a module-path for the java command.  It either includes the classes
+# in the $TARGET directory or the $TARGET/$MAINJAR (if it exists) and the
+# $EXTERNAL_MODULES defined in env.sh.
+#
+if [ -f $PROJECTDIR/$TARGET/$MAINJAR ]
+then
+	MODPATH=$TARGET/$MAINJAR
+else
+	MODPATH=$TARGET
+fi
+for ((i=0; i<${#EXTERNAL_MODULES[@]}; i++ ))
+do
+    MODPATH=${MODPATH}":""${EXTERNAL_MODULES[$i]}"
+done
 
 #
 # Function to print command-line options to standard output

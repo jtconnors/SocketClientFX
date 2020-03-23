@@ -11,4 +11,4 @@ cd `dirname $0`
 #
 . env.sh
 
-exec_cmd "$JPACKAGE_HOME/bin/jpackage create-installer $VERBOSE_OPTION --installer-type dmg --output $INSTALLER --app-image $APPIMAGE --name $LAUNCHER --app-version $VERSION"
+exec_cmd "$JPACKAGE_HOME/bin/jpackage --name $LAUNCHER $VERBOSE_OPTION --module-path $MODPATH --module $MAINMODULE/$MAINCLASS"

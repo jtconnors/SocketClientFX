@@ -11,4 +11,4 @@ cd `dirname $0`
 #
 . env.sh
 
-exec_cmd "$JPACKAGE_HOME/bin/jpackage create-image $VERBOSE_OPTION --runtime-image $IMAGE --input $TARGET --output $APPIMAGE --name $LAUNCHER --main-jar $MAINJAR"
+exec_cmd "$JPACKAGE_HOME/bin/jpackage --type app-image $VERBOSE_OPTION --name $LAUNCHER --module $MAINMODULE/$MAINCLASS --runtime-image $IMAGE"

@@ -13,8 +13,7 @@ It is typically used in conjucntion with one of two server-side JavaFX UI applic
 or
 ```MultiSocketServerFX``` https://github.com/jtconnors/MultiSocketServerFX
 
-This latest version of the source code is tagged ```1.0-JDK11-maven```.  It is modularized and as its name suggests, works with JDK11
-and is built with the ```apache maven``` build lifecycle system.
+This version of the source code is tagged ```1.0-JDK14-maven```.  It is modularized and as its name suggests, is specific to JDK 14.  It uses the ```jdk.incubator.jpackage``` module utilities found in this release which have not been finalized and are subject to change.  It is built with the ```apache maven``` build lifecycle system.
 
 Of note, the following maven goals can be executed:
 
@@ -45,3 +44,4 @@ See also:
 - SocketServerFX: https://github.com/jtconnors/SocketServerFX
 - MultiSocketServerFX: https://github.com/jtconnors/MultiSocketServerFX
 - maven-com.jtconnors.socket: https://github.com/jtconnors/maven-com.jtconnors.socket
+
