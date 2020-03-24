@@ -1,15 +1,16 @@
 
 #
-# JAVA_HOME environment variable must be set either externally in the Poweshell environment or 
-# internally here by uncommenting out the Set-Variable line below and assiging it the location of a
-# valid JDK 14 runtime.
+# JAVA_HOME environment variable must be set either externally in the Poweshell
+# environment or internally here by uncommenting out the Set-Variable line
+# below and assiging it the location of a valid JDK 14 runtime.
 #
 #$env:JAVA_HOME = 'D:\openjdk\jdk-14'
 
 #
-# Until the jpackage module API is formalized, each JDK release (starting with JDK 14), will go through
-# refinements meaning there may be incompatibilities.  Until the API is cast in stone, we'll check to
-# make sure the JDK version in use matches the EXPECTED_JDK_VERSION defined below
+# Until the jpackage module API is formalized, each JDK release (starting with
+# JDK 14), will go through refinements meaning there may be incompatibilities.
+# Until the API is cast in stone, we'll check to make sure the JDK version
+# in use matches the EXPECTED_JDK_VERSION defined below
 #
 Set-Variable -Name EXPECTED_JDK_VERSION -Value "14"
 
@@ -224,7 +225,8 @@ if (-not (Test-Path $JPACKAGE_HOME)) {
 #
 $java_version_output = cmd /c "$env:JAVA_HOME\bin\java.exe -version 2>&1"
 $jdk_version_unfiltered = $java_version_output.Split(" ")[2].split(".-")[0]
-# Some versions return the Java version in double quotes ("").  Git rid of them for a proper comparison.
+# Some versions return the Java version in double quotes ("").  Git rid of
+# them for a proper comparison.
 $jdk_version = $jdk_version_unfiltered -replace '["]'
 if ($jdk_version -ne $EXPECTED_JDK_VERSION) {
     GoodBye "JDK version '$jdk_version' does not match expected version: '$EXPECTED_JDK_VERSION'. JAVA_HOME should be set to a JDK $EXPECTED_JDK_VERSION implementation." $LASTEXITCODE
