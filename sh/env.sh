@@ -199,7 +199,9 @@ java_version_output=`$JAVA_HOME/bin/java -version 2>&1`
 jdk_version_unfiltered=`echo $java_version_output | awk -F" " '{print $3}'`
 # Some versions return the Java version in double quotes ("").  Git rid of
 # them for a proper comparison.
-jdk_version=`echo $jdk_version_unfiltered | sed 's/"//g'`
+jdk_version_untruncated=`echo $jdk_version_unfiltered | sed 's/"//g'`
+# Truncate anything after major release i.e. 14.0.2 => 14, 11-redhat.0.1 => 11
+jdk_version=`echo $jdk_version_untruncated | cut -d"." -f1 | cut -d"-" -f1`
 if [ "$jdk_version" != "$EXPECTED_JDK_VERSION" ]
 then
     echo "JDK version '$jdk_version' does not match expected version: '$EXPECTED_JDK_VERSION'. JAVA_HOME should be set to a JDK $EXPECTED_JDK_VERSION implementation."
