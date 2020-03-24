@@ -29,17 +29,14 @@ if ($Global:JUST_EXIT -eq "true") {
 # Run the Java command
 #
 Set-Variable -Name JPACKAGE_ARGS -Value @(
-    'create-image',
-    '--runtime-image',
-    """$IMAGE""",
-    "--input",
-    """$TARGET""",
-    '--output',
-    """$APPIMAGE""",
+    '--type',
+    'app-image',
     '--name',
     """$LAUNCHER""",
-    '--main-jar',
-    """$MAINJAR"""
+    '--module',
+    """$MAINMODULE/$MAINCLASS""",
+    '--runtime-image',
+    """$IMAGE"""
 )
 if ($VERBOSE_OPTION -ne $null) {
    $JPACKAGE_ARGS += '--verbose'

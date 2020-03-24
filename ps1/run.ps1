@@ -30,15 +30,15 @@ if ($Global:JUST_EXIT -eq "true") {
 # in the $TARGET directory or the $TARGET/$MAINJAR (if it exists) and the
 # $EXTERNAL_MODULES defined in env.ps1.
 #
-if (Test-Path $TARGET\$MAINJAR) {
-    Set-Variable -Name MODPATH -Value $TARGET\$MAINJAR
-} else {
-     Set-Variable -Name MODPATH -Value $TARGET
-}
-ForEach ($i in $EXTERNAL_MODULES) {
-   $MODPATH += ";"
-   $MODPATH += $i
-}
+#if (Test-Path $TARGET\$MAINJAR) {
+#    Set-Variable -Name MODPATH -Value $TARGET\$MAINJAR
+#} else {
+#     Set-Variable -Name MODPATH -Value $TARGET
+#}
+#ForEach ($i in $EXTERNAL_MODULES) {
+#   $MODPATH += ";"
+#   $MODPATH += $i
+#}
 
 #
 # Run the Java command
@@ -49,7 +49,8 @@ Set-Variable -Name JAVA_ARGS -Value @(
     "-m",
     """$MAINMODULE/$MAINCLASS"""
 )
-Exec-Cmd("java.exe", $JAVA_ARGS)
+#Exec-Cmd("java.exe", $JAVA_ARGS)
+Exec-Cmd("$env:JAVA_HOME\bin\java.exe", $JAVA_ARGS)
 
 #
 # Return to the original directory

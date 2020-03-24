@@ -29,17 +29,15 @@ if ($Global:JUST_EXIT -eq "true") {
 # Run the Java command
 #
 Set-Variable -Name JPACKAGE_ARGS -Value @(
-    'create-installer',
-    "--installer-type",
-    'msi',
-    '--output',
-    """$INSTALLER""",
-    '--app-image',
-    """$APPIMAGE\$LAUNCHER""",
     '--name',
-     """$LAUNCHER""",
-    '--app-version',
-    """$VERSION"""
+    """$LAUNCHER""",
+    '--type',
+    'msi',
+    '--win-shortcut',
+    '--module-path',
+    """$MODPATH""",
+    '--module',
+    """$MAINMODULE/$MAINCLASS"""
 )
 if ($VERBOSE_OPTION -ne $null) {
    $JPACKAGE_ARGS += '--verbose'

@@ -1,9 +1,25 @@
 
 #
-# Location of JDK with jpackage utility.  We defult to the user's Download
-# directory.  If it's in a different place, this variable must be changed.
+# JAVA_HOME environment variable must be set either externally in the Poweshell environment or 
+# internally here by uncommenting out the Set-Variable line below and assiging it the location of a
+# valid JDK 14 runtime.
 #
-Set-Variable -Name JPACKAGE_HOME -Value ~\Downloads\jdk-13
+#$env:JAVA_HOME = 'D:\openjdk\jdk-14'
+
+#
+# Until the jpackage module API is formalized, each JDK release (starting with JDK 14), will go through
+# refinements meaning there may be incompatibilities.  Until the API is cast in stone, we'll check to
+# make sure the JDK version in use matches the EXPECTED_JDK_VERSION defined below
+#
+Set-Variable -Name EXPECTED_JDK_VERSION -Value "14"
+
+
+#
+# Location of JDK with jpackage utility. This is here for legacy reasons.
+# First prototype required a separate JDK build.  Starting with JDK 14,
+# it's built into the standard JDK.
+#
+Set-Variable -Name JPACKAGE_HOME -Value $env:JAVA_HOME
 
 #
 # Unless these script files have been deliberately moved, the parent
@@ -21,7 +37,7 @@ Set-Variable -Name PLATFORM -Value win
 # Application specific variables
 #
 Set-Variable -Name PROJECT -Value SocketClientFX
-Set-Variable -Name VERSION -Value "11.0"
+Set-Variable -Name VERSION -Value "14.0"
 Set-Variable -Name MAINMODULE -Value socketclientfx
 Set-Variable -Name MAINCLASS -Value com.jtconnors.socketclientfx.SocketClientFX
 Set-Variable -Name MAINJAR -Value $PROJECT-$VERSION.jar
@@ -58,15 +74,30 @@ Set-Variable -Name INSTALLER -Value installer
 #
 Set-Variable -Name EXTERNAL_MODULES -Value @(
     "$REPO\com\jtconnors\com.jtconnors.socket\11.0.3\com.jtconnors.socket-11.0.3.jar",
-    "$REPO\org\openjfx\javafx-base\11.0.1\javafx-base-11.0.1.jar",
-    "$REPO\org\openjfx\javafx-controls\11.0.1\javafx-controls-11.0.1.jar",
-    "$REPO\org\openjfx\javafx-fxml\11.0.1\javafx-fxml-11.0.1.jar",
-    "$REPO\org\openjfx\javafx-graphics\11.0.1\javafx-graphics-11.0.1.jar",
-    "$REPO\org\openjfx\javafx-base\11.0.1\javafx-base-11.0.1-$PLATFORM.jar",
-    "$REPO\org\openjfx\javafx-controls\11.0.1\javafx-controls-11.0.1-$PLATFORM.jar",
-    "$REPO\org\openjfx\javafx-fxml\11.0.1\javafx-fxml-11.0.1-$PLATFORM.jar",
-    "$REPO\org\openjfx\javafx-graphics\11.0.1\javafx-graphics-11.0.1-$PLATFORM.jar"
+    "$REPO\org\openjfx\javafx-base\14\javafx-base-14.jar",
+    "$REPO\org\openjfx\javafx-controls\14\javafx-controls-14.jar",
+    "$REPO\org\openjfx\javafx-fxml\14\javafx-fxml-14.jar",
+    "$REPO\org\openjfx\javafx-graphics\14\javafx-graphics-14.jar",
+    "$REPO\org\openjfx\javafx-base\14\javafx-base-14-$PLATFORM.jar",
+    "$REPO\org\openjfx\javafx-controls\14\javafx-controls-14-$PLATFORM.jar",
+    "$REPO\org\openjfx\javafx-fxml\14\javafx-fxml-14-$PLATFORM.jar",
+    "$REPO\org\openjfx\javafx-graphics\14\javafx-graphics-14-$PLATFORM.jar"
 )
+
+#
+# Create a module-path for the java command.  It either includes the classes
+# in the $TARGET directory or the $TARGET/$MAINJAR (if it exists) and the
+# $EXTERNAL_MODULES defined in env.ps1.
+#
+if (Test-Path $PROJECTDIR\$TARGET\$MAINJAR) {
+    Set-Variable -Name MODPATH -Value $TARGET\$MAINJAR
+} else {
+     Set-Variable -Name MODPATH -Value $TARGET
+}
+ForEach ($i in $EXTERNAL_MODULES) {
+   $MODPATH += ";"
+   $MODPATH += $i
+}
 
 Set-Variable -Name SCRIPT_NAME -Value $MyInvocation.MyCommand.Name
 
@@ -173,10 +204,30 @@ if (-not (Test-Path $PROJECTDIR)) {
 }
 
 #
+# Check if $env:JAVA_HOME is both set and assigned to a valid Path
+#
+if ($env:JAVA_HOME -eq $null) {
+    GoodBye "env:JAVA_HOME Environment Variable is not set. Set the env:JAVA_HOME variable to a vaild JDK runtime location in your Powershell environment or uncomment and edit the 'set-Variable' statement at the beginning of the ps1\env.ps1 file." $LASTEXITCODE 
+} elseif (-not (Test-Path $env:JAVA_HOME)) {
+	GoodBye "Path for Java Home 'env:JAVA_HOME' does not exist. Set the env:JAVA_HOME variable to a vaild JDK runtime location in your Powershell environment or uncomment and edit the 'set-Variable' statement at the beginning of the ps1\env.ps1 file." $LASTEXITCODE 
+}
+
+#
 # Check if $JPACKAGE_HOME exists
 #
 if (-not (Test-Path $JPACKAGE_HOME)) {
 	GoodBye "jpackage home '$JPACKAGE_HOME' does not exist. Edit JPACKAGE_HOME viariable in ps1\env.ps1." $LASTEXITCODE 
+}
+
+#
+# Check to make sure we have the proper Java Version
+#
+$java_version_output = cmd /c "$env:JAVA_HOME\bin\java.exe -version 2>&1"
+$jdk_version_unfiltered = $java_version_output.Split(" ")[2].split(".-")[0]
+# Some versions return the Java version in double quotes ("").  Git rid of them for a proper comparison.
+$jdk_version = $jdk_version_unfiltered -replace '["]'
+if ($jdk_version -ne $EXPECTED_JDK_VERSION) {
+    GoodBye "JDK version '$jdk_version' does not match expected version: '$EXPECTED_JDK_VERSION'. JAVA_HOME should be set to a JDK $EXPECTED_JDK_VERSION implementation." $LASTEXITCODE
 }
 
 cd $PROJECTDIR

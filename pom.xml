@@ -67,7 +67,12 @@
                             <directory>.</directory>
 						    <includes>
                                 <include>*.dmg</include>
+								<include>*.exe</include>
+								<include>*.msi</include>
 						    </includes>
+                        </fileset>
+						<fileset>
+                            <directory>${project.artifactId}</directory>
                         </fileset>
                     </filesets>
                 </configuration>
