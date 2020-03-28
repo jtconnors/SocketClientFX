@@ -23,7 +23,7 @@ Of note, the following maven goals can be executed:
    - ```mvn package``` - to create the ```SocketClientFX``` module as a jar file
    - ```mvn exec:java``` to run the application
    
-Furthermore, additional ```.sh``` and ```.ps1``` files are provided in the ```sh/``` and ```ps1\``` directories respectively.   Prior to runnig these scripts the ```JAVA_HOME``` environment variable must be set to a valid JDK 14 runtime:
+Furthermore, additional ```.sh``` and ```.ps1``` files are provided in the ```sh/``` and ```ps1\``` directories respectively. **Prior to runnig these scripts, either the ```JAVA_HOME``` or ```$env:JAVA_HOME``` (depending upon the platform in question) environment variable must be set to a valid JDK 14 runtime**:
    - ```sh/run.sh``` or ```ps1\run.ps1``` - script file to run the application from the module path
    - ```sh/run-simplified.sh``` or ```ps1\run-simplified.ps1``` - alternative script file to run the application, determines main class from ```SocketClientFX``` module
    - ```sh/link.sh``` or ```ps1\link.ps1``` - creates a runtime image using the ```jlink``` utility
