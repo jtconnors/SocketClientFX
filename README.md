@@ -15,6 +15,11 @@ or
 
 This version of the source code is tagged ```1.0-JDK14-maven```.  As its name suggests, it is specific to JDK 14 and can be built with the ```apache maven``` build lifecycle system. It uses the ```jdk.incubator.jpackage``` module utilities whose API has not been finalized and is subject to change.  As such, the scripts contained in this project will insist that JDK 14 be used because subsequent ```jpackage``` releases may be incompatible.
 
+**Requirements:**
+1. Your default JDK should point to a valid JDK 14 runtime in your ```PATH```.
+2. Prior to running any of the scripts in this project, either the ```JAVA_HOME``` or ```$env:JAVA_HOME``` (depending upon the platform in question) environment variable must be set to a valid JDK 14 runtime.
+3.  In order to generate ```EXE``` or ```MSI``` installers for Windows using the scripts in this project, the WiX toolkit version 3.0 or greater must be installed and placed on the ```PATH```.
+
 Of note, the following maven goals can be executed:
 
    - ```mvn clean```
@@ -23,7 +28,7 @@ Of note, the following maven goals can be executed:
    - ```mvn package``` - to create the ```SocketClientFX``` module as a jar file
    - ```mvn exec:java``` to run the application
    
-Furthermore, additional ```.sh``` and ```.ps1``` files are provided in the ```sh/``` and ```ps1\``` directories respectively. **Prior to runnig these scripts, either the ```JAVA_HOME``` or ```$env:JAVA_HOME``` (depending upon the platform in question) environment variable must be set to a valid JDK 14 runtime**:
+Furthermore, additional ```.sh``` and ```.ps1``` files are provided in the ```sh/``` and ```ps1\``` directories respectively:
    - ```sh/run.sh``` or ```ps1\run.ps1``` - script file to run the application from the module path
    - ```sh/run-simplified.sh``` or ```ps1\run-simplified.ps1``` - alternative script file to run the application, determines main class from ```SocketClientFX``` module
    - ```sh/link.sh``` or ```ps1\link.ps1``` - creates a runtime image using the ```jlink``` utility
@@ -35,11 +40,11 @@ Furthermore, additional ```.sh``` and ```.ps1``` files are provided in the ```sh
 Notes:
    - These scripts have a few available command-line options.  To print out
 the options, add ```-?``` or ```--help``` as an argument to any script.
-   - The scripts share common properties that can be found in ```env.sh``` or ```env.ps1``` and may need to be slightly modified to match  your specific configuration.
-   
+   - A sample ```Microsoft.PowerShell_profile.ps1``` file has been included to help configure a default Powershell execution environment.  A similar file can be generated specific to environments appropriate for running the ```bash(1)``` shell with a ```.bash_login``` or ```.bash_profile``` file.
+
+
 See also:
 
 - SocketServerFX: https://github.com/jtconnors/SocketServerFX
 - MultiSocketServerFX: https://github.com/jtconnors/MultiSocketServerFX
 - maven-com.jtconnors.socket: https://github.com/jtconnors/maven-com.jtconnors.socket
-
