@@ -66,9 +66,11 @@
                         <fileset>
                             <directory>.</directory>
 						    <includes>
+                                <include>*.deb</include>
                                 <include>*.dmg</include>
 								<include>*.exe</include>
 								<include>*.msi</include>
+								<include>*.pkg</include>
 						    </includes>
                         </fileset>
 						<fileset>
