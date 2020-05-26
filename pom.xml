@@ -71,6 +71,7 @@
 								<include>*.exe</include>
 								<include>*.msi</include>
 								<include>*.pkg</include>
+								<include>*.rpm</include>
 						    </includes>
                         </fileset>
 						<fileset>
