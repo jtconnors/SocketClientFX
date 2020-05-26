@@ -29,9 +29,20 @@ JPACKAGE_HOME=$JAVA_HOME
 PROJECTDIR=..
 
 #
-# native platform
+# Determine Operating System platform. Currently only MacOS (PLATFORM=mac)
+# and Linux (PLATFORM=linux) are supported.
 #
-PLATFORM=mac
+case "$(uname)" in
+	Darwin)
+		PLATFORM=mac
+		;;
+	Linux)
+		PLATFORM=linux
+		;;
+	*)
+		echo "Only x86_64 versions of MacOS or Linux supported, '$(uname)' unavailable."
+	exit 1
+esac
 
 #
 # Application specific variables

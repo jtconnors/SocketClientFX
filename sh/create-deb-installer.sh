@@ -14,12 +14,11 @@ cd `dirname $0`
 #
 # Non-native package builds are not supported
 #
-TYPE=dmg
-if [ "$PLATFORM" != "mac" ]
+TYPE=deb
+if [ "$PLATFORM" != "linux" ]
 then
 	echo "Cannot create package type '$TYPE' on $PLATFORM platform"
         exit 1
 fi
-
 
 exec_cmd "$JPACKAGE_HOME/bin/jpackage --type $TYPE --name $LAUNCHER $VERBOSE_OPTION --module-path $MODPATH --module $MAINMODULE/$MAINCLASS"
