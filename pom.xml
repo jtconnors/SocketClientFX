@@ -14,7 +14,7 @@
         <mainClass>com.jtconnors.socketclientfx.SocketClientFX</mainClass>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-	</properties>
+    </properties>
 
     <organization>
         <!-- Used as the 'Vendor' for JNLP generation -->
@@ -65,16 +65,16 @@
                         </fileset>
                         <fileset>
                             <directory>.</directory>
-						    <includes>
-                                <include>*.deb</include>
-                                <include>*.dmg</include>
-								<include>*.exe</include>
-								<include>*.msi</include>
-								<include>*.pkg</include>
-								<include>*.rpm</include>
-						    </includes>
+                                <includes>
+                                    <include>*.deb</include>
+                                    <include>*.dmg</include>
+                                    <include>*.exe</include>
+                                    <include>*.msi</include>
+                                    <include>*.pkg</include>
+                                    <include>*.rpm</include>
+                                </includes>
                         </fileset>
-						<fileset>
+                        <fileset>
                             <directory>${project.artifactId}</directory>
                         </fileset>
                     </filesets>
@@ -106,7 +106,7 @@
                 <configuration>
                     <mainClass>${mainClass}</mainClass>
                 </configuration>
-            </plugin>   
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
