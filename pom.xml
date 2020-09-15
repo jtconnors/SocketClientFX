@@ -4,7 +4,7 @@
 
     <groupId>com.jtconnors</groupId>
     <artifactId>SocketClientFX</artifactId>
-    <version>14.0</version>
+    <version>15.0</version>
     <packaging>jar</packaging>
 
     <name>SocketClientFX</name>
@@ -30,22 +30,22 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
-            <version>14</version>
+            <version>15</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>14</version>
+            <version>15</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>14</version>
+            <version>15</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
-            <version>14</version>
+            <version>15</version>
         </dependency>
     </dependencies>
     
