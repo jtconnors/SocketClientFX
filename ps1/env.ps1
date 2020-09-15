@@ -2,9 +2,9 @@
 #
 # JAVA_HOME environment variable must be set either externally in the Poweshell
 # environment or internally here by uncommenting out the Set-Variable line
-# below and assiging it the location of a valid JDK 14 runtime.
+# below and assiging it the location of a valid JDK 15 runtime.
 #
-#$env:JAVA_HOME = 'D:\openjdk\jdk-14'
+#$env:JAVA_HOME = 'D:\openjdk\jdk-15'
 
 #
 # Until the jpackage module API is formalized, each JDK release (starting with
@@ -12,7 +12,7 @@
 # Until the API is cast in stone, we'll check to make sure the JDK version
 # in use matches the EXPECTED_JDK_VERSION defined below
 #
-Set-Variable -Name EXPECTED_JDK_VERSION -Value "14"
+Set-Variable -Name EXPECTED_JDK_VERSION -Value "15"
 
 
 #
@@ -38,7 +38,7 @@ Set-Variable -Name PLATFORM -Value win
 # Application specific variables
 #
 Set-Variable -Name PROJECT -Value SocketClientFX
-Set-Variable -Name VERSION -Value "14.0"
+Set-Variable -Name VERSION -Value "15.0"
 Set-Variable -Name MAINMODULE -Value socketclientfx
 Set-Variable -Name MAINCLASS -Value com.jtconnors.socketclientfx.SocketClientFX
 Set-Variable -Name MAINJAR -Value $PROJECT-$VERSION.jar
@@ -75,14 +75,14 @@ Set-Variable -Name INSTALLER -Value installer
 #
 Set-Variable -Name EXTERNAL_MODULES -Value @(
     "$REPO\com\jtconnors\com.jtconnors.socket\11.0.3\com.jtconnors.socket-11.0.3.jar",
-    "$REPO\org\openjfx\javafx-base\14\javafx-base-14.jar",
-    "$REPO\org\openjfx\javafx-controls\14\javafx-controls-14.jar",
-    "$REPO\org\openjfx\javafx-fxml\14\javafx-fxml-14.jar",
-    "$REPO\org\openjfx\javafx-graphics\14\javafx-graphics-14.jar",
-    "$REPO\org\openjfx\javafx-base\14\javafx-base-14-$PLATFORM.jar",
-    "$REPO\org\openjfx\javafx-controls\14\javafx-controls-14-$PLATFORM.jar",
-    "$REPO\org\openjfx\javafx-fxml\14\javafx-fxml-14-$PLATFORM.jar",
-    "$REPO\org\openjfx\javafx-graphics\14\javafx-graphics-14-$PLATFORM.jar"
+    "$REPO\org\openjfx\javafx-base\15\javafx-base-15.jar",
+    "$REPO\org\openjfx\javafx-controls\15\javafx-controls-15.jar",
+    "$REPO\org\openjfx\javafx-fxml\15\javafx-fxml-15.jar",
+    "$REPO\org\openjfx\javafx-graphics\15\javafx-graphics-15.jar",
+    "$REPO\org\openjfx\javafx-base\15\javafx-base-15-$PLATFORM.jar",
+    "$REPO\org\openjfx\javafx-controls\15\javafx-controls-15-$PLATFORM.jar",
+    "$REPO\org\openjfx\javafx-fxml\15\javafx-fxml-15-$PLATFORM.jar",
+    "$REPO\org\openjfx\javafx-graphics\15\javafx-graphics-15-$PLATFORM.jar"
 )
 
 #
