@@ -41,6 +41,7 @@ Furthermore, additional ```.sh``` and ```.ps1``` files are provided in the ```sh
    - ```ps1\create-msi-installer.ps1``` - creates a native Windows MSI installer of this application using JEP-343 jpackage tool
    - ```sh/create-pkg-installer.sh``` - creates a native MacOS PKG installer of this application using JEP-343 jpackage tool
    - ```sh/create-rpm-installer.sh``` - creates a native Linux RPM installer of this application using JEP-343 jpackage tool
+   - ```ps1\create-generic-msi.ps1``` - creates a generic MSI installer of he JDK in use for this build using JEP-343 jpackage tool
 
 Notes:
    - These scripts have a few available command-line options.  To print out
