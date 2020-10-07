@@ -23,6 +23,12 @@ Set-Variable -Name EXPECTED_JDK_VERSION -Value "15"
 Set-Variable -Name JPACKAGE_HOME -Value $env:JAVA_HOME
 
 #
+# Vendor string used when creating native installers with the
+# jpackage utility.
+#
+Set-Variable -Name VENDOR_STRING -Value "jtconnors.com"
+
+#
 # Unless these script files have been deliberately moved, the parent
 # directory of the directory containining these script files houses
 # the maven project and source code.
