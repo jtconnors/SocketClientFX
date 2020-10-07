@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import com.jtconnors.socketfx.FxSocketClient;
 
 /**
@@ -57,7 +58,9 @@ public class FXMLDocumentController implements Initializable {
 
     private ObservableList<String> rcvdMsgsData;
     private ObservableList<String> sentMsgsData;
-    private ListView lastSelectedListView;
+    private ListView<String> lastSelectedListView;
+    private Tooltip portTooltip;
+    private Tooltip hostTooltip;
 
     private boolean connected;
     private volatile boolean isAutoConnected;
@@ -208,6 +211,30 @@ public class FXMLDocumentController implements Initializable {
             }
         });
 
+        portTooltip = new Tooltip("Port number cannot be modified once\n" +
+        "the first connection attempt is initiated.\n" +
+        "Restart application in order to change.");
+
+        portTextField.textProperty().addListener((obs, oldText, newText) -> {
+            try {
+                Integer.parseInt(newText);
+            } catch (NumberFormatException e) {
+                portTextField.setText(oldText);
+            }
+        });
+
+        hostTooltip = new Tooltip("Host cannot be modified once\n" +
+        "the first connection attempt is initiated.\n" +
+        "Restart application to change.");
+
+        retryIntervalTextField.textProperty().addListener((obs, oldText, newText) -> {
+            try {
+                Integer.parseInt(newText);
+            } catch (NumberFormatException e) {
+                retryIntervalTextField.setText(oldText);
+            }
+        });
+
         Runtime.getRuntime().addShutdownHook(new ShutDownThread());
     }
 
@@ -280,6 +307,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void handleConnectButton(ActionEvent event) {
         displayState(ConnectionDisplayState.ATTEMPTING);
+        hostTextField.setEditable(false);
+        hostTextField.setTooltip(hostTooltip);
+        portTextField.setEditable(false);
+        portTextField.setTooltip(portTooltip);
         connect();
     }
 
@@ -292,6 +323,10 @@ public class FXMLDocumentController implements Initializable {
     private void handleAutoConnectCheckBox(ActionEvent event) {
         if (autoConnectCheckBox.isSelected()) {
             isAutoConnected = true;
+            hostTextField.setEditable(false);
+            hostTextField.setTooltip(hostTooltip);
+            portTextField.setEditable(false);
+            portTextField.setTooltip(portTooltip);
             if (isConnected()) {
                 displayState(ConnectionDisplayState.AUTOCONNECTED);
             } else {
@@ -305,16 +340,6 @@ public class FXMLDocumentController implements Initializable {
             } else {
                 displayState(ConnectionDisplayState.DISCONNECTED);
             }
-        }
-    }
-
-    @FXML
-    private void handleRetryIntervalTextField(ActionEvent event) {
-        try {
-            Integer.parseInt(retryIntervalTextField.getText());
-        } catch (NumberFormatException ex) {
-            retryIntervalTextField.setText(
-                    Integer.toString(DEFAULT_RETRY_INTERVAL / 1000));
         }
     }
 }

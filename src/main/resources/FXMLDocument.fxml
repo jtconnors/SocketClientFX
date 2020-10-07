@@ -116,7 +116,7 @@
                   <Insets left="5.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="retryIntervalTextField" onAction="#handleRetryIntervalTextField" prefHeight="25.0" prefWidth="41.0" text="2" />
+             <TextField fx:id="retryIntervalTextField" prefHeight="25.0" prefWidth="41.0" text="2" />
          </children>
       </HBox>
    </children>
