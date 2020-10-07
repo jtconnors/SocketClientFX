@@ -13,7 +13,7 @@ It is typically used in conjucntion with one of two server-side JavaFX UI applic
 or
 ```MultiSocketServerFX``` https://github.com/jtconnors/MultiSocketServerFX
 
-This version of the source code is tagged ```1.0-JDK15-maven```.  As its name suggests, it is specific to JDK 15 and can be built with the ```apache maven``` build lifecycle system. It uses the ```jdk.incubator.jpackage``` module utilities whose API has not been finalized and is subject to change.  As such, the scripts contained in this project will insist that JDK 15 be used because subsequent ```jpackage``` releases may be incompatible.
+This version of the source code is tagged ```1.1-JDK15-maven```.  As its name suggests, it is specific to JDK 15 and can be built with the ```apache maven``` build lifecycle system. It uses the ```jdk.incubator.jpackage``` module utilities whose API has not been finalized and is subject to change.  As such, the scripts contained in this project will insist that JDK 15 be used because subsequent ```jpackage``` releases may be incompatible.
 
 This project works on WIndows, MacOS or Linux.
 
