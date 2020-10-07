@@ -21,4 +21,4 @@ then
         exit 1
 fi
 
-exec_cmd "$JPACKAGE_HOME/bin/jpackage --type $TYPE --name $LAUNCHER $VERBOSE_OPTION --module-path $MODPATH --module $MAINMODULE/$MAINCLASS"
+exec_cmd "$JPACKAGE_HOME/bin/jpackage --type $TYPE --vendor $VENDOR_STRING --name $LAUNCHER $VERBOSE_OPTION --module-path $MODPATH --module $MAINMODULE/$MAINCLASS"

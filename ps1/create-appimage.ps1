@@ -31,6 +31,8 @@ if ($Global:JUST_EXIT -eq "true") {
 Set-Variable -Name JPACKAGE_ARGS -Value @(
     '--type',
     'app-image',
+    '--vendor',
+    """$VENDOR_STRING""",
     '--name',
     """$LAUNCHER""",
     '--module',

@@ -30,6 +30,8 @@ Set-Variable -Name JPACKAGE_ARGS -Value @(
     """$LAUNCHER""",
     '--type',
     'exe',
+    '--vendor',
+    """$VENDOR_STRING""",
     '--win-shortcut',
     '--module-path',
     """$MODPATH""",

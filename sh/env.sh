@@ -25,6 +25,12 @@ EXPECTED_JDK_VERSION="15"
 JPACKAGE_HOME=$JAVA_HOME
 
 #
+# Vendor string used when creating native installers with the
+# jpackage utility.
+#
+VENDOR_STRING="jtconnors.com"
+
+#
 # Unless these script files have been deliberately moved, the parent
 # directory of the directory containining these script files houses
 # the maven project and source code.
