@@ -8,5 +8,5 @@
 # o edited to reflect your JDK environment
 #
 
-$env:PATH = 'd:\openjdk\jdk-14\bin;' + $env:PATH
-$env:JAVA_HOME = 'd:\openjdk\jdk-14'
+$env:PATH = 'd:\openjdk\jdk-17\bin;' + $env:PATH
+$env:JAVA_HOME = 'd:\openjdk\jdk-17'

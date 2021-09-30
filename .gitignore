@@ -3,3 +3,7 @@
 /image/
 /appimage/
 /installer/
+.settings
+.vscode
+.classpath
+.project

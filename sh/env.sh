@@ -2,12 +2,12 @@
 # 
 # JAVA_HOME environment variable must be set either externally in your
 # environment or internally here by uncommenting out one of the lines
-# below and assiging it the location of a valid JDK 15 runtime.
+# below and assiging it the location of a valid JDK 17 runtime.
 #
 # MacOS example
-#export JAVA_HOME="~/IDE/jdk-15.jdk/Contents/Home"
+#export JAVA_HOME="~/IDE/jdk-17.jdk/Contents/Home"
 # Linux Example
-#export JAVA_HOME="~/jdk-15"
+#export JAVA_HOME="~/jdk-17"
 
 #
 # Until the jpackage module API is formalized, each JDK release (starting with
@@ -15,7 +15,7 @@
 # Until the API is cast in stone, we'll check to make sure the JDK version
 # in use matches the EXPECTED_JDK_VERSION defined below
 #
-EXPECTED_JDK_VERSION="15"
+EXPECTED_JDK_VERSION="17"
 
 #
 # Location of JDK with jpackage utility. This is here for legacy reasons.
@@ -57,7 +57,7 @@ esac
 # Application specific variables
 #
 PROJECT=SocketClientFX
-VERSION=15.0
+VERSION=17.0
 MAINMODULE=socketclientfx
 MAINCLASS=com.jtconnors.socketclientfx.SocketClientFX
 MAINJAR=$PROJECT-$VERSION.jar
@@ -91,17 +91,18 @@ INSTALLER=installer
 
 #
 # Required external modules for this application
+# For JDK 17 javafx modules, make sure to use version 17.0.0.1 or greater
 #
 EXTERNAL_MODULES=(
     "$REPO/com/jtconnors/com.jtconnors.socket/11.0.3/com.jtconnors.socket-11.0.3.jar"
-    "$REPO/org/openjfx/javafx-base/15/javafx-base-15.jar"
-    "$REPO/org/openjfx/javafx-controls/15/javafx-controls-15.jar"
-    "$REPO/org/openjfx/javafx-fxml/15/javafx-fxml-15.jar"
-    "$REPO/org/openjfx/javafx-graphics/15/javafx-graphics-15.jar"
-    "$REPO/org/openjfx/javafx-base/15/javafx-base-15-$PLATFORM.jar"
-    "$REPO/org/openjfx/javafx-controls/15/javafx-controls-15-$PLATFORM.jar"
-    "$REPO/org/openjfx/javafx-fxml/15/javafx-fxml-15-$PLATFORM.jar"
-    "$REPO/org/openjfx/javafx-graphics/15/javafx-graphics-15-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-base/17.0.0.1/javafx-base-17.0.0.1.jar"
+    "$REPO/org/openjfx/javafx-controls/17.0.0.1/javafx-controls-17.0.0.1.jar"
+    "$REPO/org/openjfx/javafx-fxml/17.0.0.1/javafx-fxml-17.0.0.1.jar"
+    "$REPO/org/openjfx/javafx-graphics/17.0.0.1/javafx-graphics-17.0.0.1.jar"
+    "$REPO/org/openjfx/javafx-base/17.0.0.1/javafx-base-17.0.0.1-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-controls/17.0.0.1/javafx-controls-17.0.0.1-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-fxml/17.0.0.1/javafx-fxml-17.0.0.1-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-graphics/17.0.0.1/javafx-graphics-17.0.0.1-$PLATFORM.jar"
 )
 
 #

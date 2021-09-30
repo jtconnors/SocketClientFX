@@ -13,14 +13,15 @@ It is typically used in conjucntion with one of two server-side JavaFX UI applic
 or
 ```MultiSocketServerFX``` https://github.com/jtconnors/MultiSocketServerFX
 
-This version of the source code is tagged ```1.1-JDK15-maven```.  As its name suggests, it is specific to JDK 15 and can be built with the ```apache maven``` build lifecycle system. It uses the ```jdk.incubator.jpackage``` module utilities whose API has not been finalized and is subject to change.  As such, the scripts contained in this project will insist that JDK 15 be used because subsequent ```jpackage``` releases may be incompatible.
+This version of the source code is tagged ```1.1-JDK17-maven```.  As its name suggests, it is specific to JDK 17 and can be built with the ```apache maven``` build lifecycle system. Scripts contained in this project will insist that JDK 17 be used, the first LTS release that formally includes the ```jpackage``` utility.  Subsequent JDK releases have not been tested with this version of the project. 
 
-This project works on WIndows, MacOS or Linux.
+This project works on Windows, MacOS or Linux.
 
 **Requirements:**
-1. Your default JDK should point to a valid JDK 15 runtime in your ```PATH```.
-2. Prior to running any of the scripts in this project, either the ```JAVA_HOME``` or ```$env:JAVA_HOME``` (depending upon the platform in question) environment variable must be set to a valid JDK 15 runtime.
+1. Your default JDK should point to a valid JDK 17 runtime in your ```PATH```.
+2. Prior to running any of the scripts in this project, either the ```JAVA_HOME``` or ```$env:JAVA_HOME``` (depending upon the platform in question) environment variable must be set to a valid JDK 17 runtime.
 3.  In order to generate ```EXE``` or ```MSI``` installers for Windows using the scripts in this project, the WiX toolkit version 3.0 or greater must be installed and placed on the ```PATH```.
+4.  For certain Linux distributions (e.g. Oracle Linux ...) additional tooling, like for example  ```rpmbuild```, may be required in order to fully utilize the ```jpackage``` utility.
 
 Of note, the following maven goals can be executed:
 
