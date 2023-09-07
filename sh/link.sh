@@ -11,4 +11,4 @@ cd `dirname $0`
 #
 . env.sh
 
-exec_cmd "jlink $VERBOSE_OPTION --module-path $MODPATH --add-modules $MAINMODULE --compress=2 --launcher $LAUNCHER=$MAINMODULE/$MAINCLASS --output $IMAGE"
+exec_cmd "jlink $VERBOSE_OPTION --module-path $MODPATH --add-modules $MAINMODULE --launcher $LAUNCHER=$MAINMODULE/$MAINCLASS --output $IMAGE"
