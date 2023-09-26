@@ -15,7 +15,7 @@ cd `dirname $0`
 # Non-native package builds are not supported
 #
 TYPE=dmg
-if [ "$PLATFORM" != "mac" ]
+if [ "$PLATFORM" != "mac" -a "$PLATFORM" != "mac-aarch64" ]
 then
 	echo "Cannot create package type '$TYPE' on $PLATFORM platform"
         exit 1

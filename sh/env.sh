@@ -2,12 +2,12 @@
 # 
 # JAVA_HOME environment variable must be set either externally in your
 # environment or internally here by uncommenting out one of the lines
-# below and assiging it the location of a valid JDK 17 runtime.
+# below and assiging it the location of a valid JDK 21 runtime.
 #
 # MacOS example
-#export JAVA_HOME="~/IDE/jdk-17.jdk/Contents/Home"
+#export JAVA_HOME="~/IDE/jdk-21.jdk/Contents/Home"
 # Linux Example
-#export JAVA_HOME="~/jdk-17"
+#export JAVA_HOME="~/jdk-21"
 
 #
 # Until the jpackage module API is formalized, each JDK release (starting with
@@ -15,7 +15,7 @@
 # Until the API is cast in stone, we'll check to make sure the JDK version
 # in use matches the EXPECTED_JDK_VERSION defined below
 #
-EXPECTED_JDK_VERSION="17"
+EXPECTED_JDK_VERSION="21"
 
 #
 # Location of JDK with jpackage utility. This is here for legacy reasons.
@@ -38,12 +38,18 @@ VENDOR_STRING="jtconnors.com"
 PROJECTDIR=..
 
 #
-# Determine Operating System platform. Currently only MacOS (PLATFORM=mac)
-# and Linux (PLATFORM=linux) are supported.
+# Determine Operating System platform. Currently only MacOS (PLATFORM=mac
+# and PLATFORM=mac-aarch64) and Linux (PLATFORM=linux) are supported.
+# This is an openjfx dependency.
 #
 case "$(uname)" in
 	Darwin)
-		PLATFORM=mac
+		if [ "$(arch)" = "arm64" ]
+		then
+			PLATFORM="mac-aarch64"
+        else
+			PLATFORM=mac
+		fi
 		;;
 	Linux)
 		PLATFORM=linux
@@ -57,7 +63,7 @@ esac
 # Application specific variables
 #
 PROJECT=SocketClientFX
-VERSION=17.0
+VERSION=21.0
 MAINMODULE=socketclientfx
 MAINCLASS=com.jtconnors.socketclientfx.SocketClientFX
 MAINJAR=$PROJECT-$VERSION.jar
@@ -91,18 +97,18 @@ INSTALLER=installer
 
 #
 # Required external modules for this application
-# For JDK 17 javafx modules, make sure to use version 17.0.0.1 or greater
+# For JDK 21 javafx modules, make sure to use version 21 or greater
 #
 EXTERNAL_MODULES=(
     "$REPO/com/jtconnors/com.jtconnors.socket/11.0.3/com.jtconnors.socket-11.0.3.jar"
-    "$REPO/org/openjfx/javafx-base/17.0.0.1/javafx-base-17.0.0.1.jar"
-    "$REPO/org/openjfx/javafx-controls/17.0.0.1/javafx-controls-17.0.0.1.jar"
-    "$REPO/org/openjfx/javafx-fxml/17.0.0.1/javafx-fxml-17.0.0.1.jar"
-    "$REPO/org/openjfx/javafx-graphics/17.0.0.1/javafx-graphics-17.0.0.1.jar"
-    "$REPO/org/openjfx/javafx-base/17.0.0.1/javafx-base-17.0.0.1-$PLATFORM.jar"
-    "$REPO/org/openjfx/javafx-controls/17.0.0.1/javafx-controls-17.0.0.1-$PLATFORM.jar"
-    "$REPO/org/openjfx/javafx-fxml/17.0.0.1/javafx-fxml-17.0.0.1-$PLATFORM.jar"
-    "$REPO/org/openjfx/javafx-graphics/17.0.0.1/javafx-graphics-17.0.0.1-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-base/21/javafx-base-21.jar"
+    "$REPO/org/openjfx/javafx-controls/21/javafx-controls-21.jar"
+    "$REPO/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar"
+    "$REPO/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar"
+    "$REPO/org/openjfx/javafx-base/21/javafx-base-21-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-controls/21/javafx-controls-21-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-fxml/21/javafx-fxml-21-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-graphics/21/javafx-graphics-21-$PLATFORM.jar"
 )
 
 #
