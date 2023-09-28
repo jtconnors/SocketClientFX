@@ -33,7 +33,6 @@ Set-Variable -Name JLINK_ARGS -Value @(
     """$MODPATH""",
     "--add-modules",
     """$MAINMODULE""",
-    '--compress=2',
     '--launcher',
     """$LAUNCHER=$MAINMODULE/$MAINCLASS""",
     '--output',
