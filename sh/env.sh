@@ -2,12 +2,12 @@
 # 
 # JAVA_HOME environment variable must be set either externally in your
 # environment or internally here by uncommenting out one of the lines
-# below and assiging it the location of a valid JDK 21 runtime.
+# below and assiging it the location of a valid JDK 25 runtime.
 #
 # MacOS example
-#export JAVA_HOME="~/IDE/jdk-21.jdk/Contents/Home"
+#export JAVA_HOME="~/IDE/jdk-25.jdk/Contents/Home"
 # Linux Example
-#export JAVA_HOME="~/jdk-21"
+#export JAVA_HOME="~/jdk-25"
 
 #
 # Until the jpackage module API is formalized, each JDK release (starting with
@@ -15,7 +15,7 @@
 # Until the API is cast in stone, we'll check to make sure the JDK version
 # in use matches the EXPECTED_JDK_VERSION defined below
 #
-EXPECTED_JDK_VERSION="21"
+EXPECTED_JDK_VERSION="25"
 
 #
 # Location of JDK with jpackage utility. This is here for legacy reasons.
@@ -63,7 +63,7 @@ esac
 # Application specific variables
 #
 PROJECT=SocketClientFX
-VERSION=21.0
+VERSION=25.0
 MAINMODULE=socketclientfx
 MAINCLASS=com.jtconnors.socketclientfx.SocketClientFX
 MAINJAR=$PROJECT-$VERSION.jar
@@ -97,18 +97,18 @@ INSTALLER=installer
 
 #
 # Required external modules for this application
-# For JDK 21 javafx modules, make sure to use version 21 or greater
+# For JDK 25 javafx modules, make sure to use version 21 or greater
 #
 EXTERNAL_MODULES=(
     "$REPO/com/jtconnors/com.jtconnors.socket/11.0.3/com.jtconnors.socket-11.0.3.jar"
-    "$REPO/org/openjfx/javafx-base/21/javafx-base-21.jar"
-    "$REPO/org/openjfx/javafx-controls/21/javafx-controls-21.jar"
-    "$REPO/org/openjfx/javafx-fxml/21/javafx-fxml-21.jar"
-    "$REPO/org/openjfx/javafx-graphics/21/javafx-graphics-21.jar"
-    "$REPO/org/openjfx/javafx-base/21/javafx-base-21-$PLATFORM.jar"
-    "$REPO/org/openjfx/javafx-controls/21/javafx-controls-21-$PLATFORM.jar"
-    "$REPO/org/openjfx/javafx-fxml/21/javafx-fxml-21-$PLATFORM.jar"
-    "$REPO/org/openjfx/javafx-graphics/21/javafx-graphics-21-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-base/25/javafx-base-25.jar"
+    "$REPO/org/openjfx/javafx-controls/25/javafx-controls-25.jar"
+    "$REPO/org/openjfx/javafx-fxml/25/javafx-fxml-25.jar"
+    "$REPO/org/openjfx/javafx-graphics/25/javafx-graphics-25.jar"
+    "$REPO/org/openjfx/javafx-base/25/javafx-base-25-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-controls/25/javafx-controls-25-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-fxml/25/javafx-fxml-25-$PLATFORM.jar"
+    "$REPO/org/openjfx/javafx-graphics/25/javafx-graphics-25-$PLATFORM.jar"
 )
 
 #
@@ -131,8 +131,8 @@ done
 # Function to print command-line options to standard output
 #
 print_options() {
-	echo usage: $0 [-?,--help,-e,-n,-v]
-	echo -e "\t-? or --help - print options to standard output and exit"
+	echo usage: $0 [--help,-e,-n,-v]
+	echo -e "\t--help - print options to standard output and exit"
 	echo -e "\t-e - echo the jdk command invocations to standard output"
 	echo -e "\t-n - don't run the java commands, just print out invocations"
 	echo -e "\t-v - --verbose flag for jdk commands that will accept it"
@@ -143,7 +143,7 @@ print_options() {
 # Process command-line arguments:  Not all flags are valid for all invocations,
 # but we'll parse them anyway.
 #
-#   -? or --help  print options to standard output and exit
+#   --help  print options to standard output and exit
 #   -e	echo the jdk command invocations to standard output
 #   -n  don't run the java commands, just print out invocations
 #   -v 	--verbose flag for jdk commands that will accept it
@@ -154,11 +154,8 @@ EXECUTE_OPTION=true
 
 for i in $*
 do
+echo "$i="$i
 	case $i in
-		"-?")
-			print_options
-			exit 0
-			;;
 		"--help")
 			print_options
 			exit 0

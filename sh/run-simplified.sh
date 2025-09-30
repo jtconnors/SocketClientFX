@@ -11,4 +11,4 @@ cd `dirname $0`
 #
 . env.sh
 
-exec_cmd "java --module-path $MODPATH --module $MAINMODULE"
+exec_cmd "java --enable-native-access=javafx.graphics --module-path $MODPATH --module $MAINMODULE"
