@@ -17,11 +17,13 @@ This version of the source code is tagged ```1.1-JDK25-maven```.  As its name su
 
 This project works on Windows, MacOS or Linux.
 
-**Requirements:**
+### Requirements:
 1. Your default JDK should point to a valid JDK 25 runtime in your ```PATH```.
 2. Prior to running any of the scripts in this project, either the ```JAVA_HOME``` or ```$env:JAVA_HOME``` (depending upon the platform in question) environment variable must be set to a valid JDK 25 runtime.
 3.  In order to generate ```EXE``` or ```MSI``` installers for Windows using the scripts in this project, the WiX toolkit version 3.0 or greater must be installed and placed on the ```PATH```.
 4.  For certain Linux distributions (e.g. Oracle Linux ...) additional tooling, like for example  ```rpmbuild```, may be required in order to fully utilize the ```jpackage``` utility.
+
+### Maven Information
 
 Of note, the following maven goals can be executed:
 
@@ -30,7 +32,35 @@ Of note, the following maven goals can be executed:
    - ```mvn compile``` - to build the application
    - ```mvn package``` - to create the ```SocketClientFX``` module as a jar file
    - ```mvn exec:java``` to run the application
-   
+
+   The Maven build also includes profiles for creating custom runtime images and native application packages directly from the Maven lifecycle.
+
+To create a trimmed runtime image with `jlink`, run:
+
+```sh
+mvn clean package -Pjlink
+```
+
+This builds the application module, copies the runtime dependencies into target/modules, and writes the generated runtime image to target/image.
+
+To create a native application image with jpackage, run:
+```
+mvn clean verify -Pjpackage
+```
+
+This first creates the jlink runtime image, then packages the application into ```target/jpackage```. By default, the jpackage profile creates an ```app-image```.
+
+Platform-specific installer profiles are also provided:
+```
+mvn clean verify -Pjpackage,jpackage-mac-dmg
+mvn clean verify -Pjpackage,jpackage-mac-pkg
+mvn clean verify -Pjpackage,jpackage-linux-deb
+mvn clean verify -Pjpackage,jpackage-linux-rpm
+mvn clean verify -Pjpackage,jpackage-windows-exe
+mvn clean verify -Pjpackage,jpackage-windows-msi
+```
+
+### Avaiable Scripts for MacOS/Linux and Windows
 Furthermore, additional ```.sh``` and ```.ps1``` files are provided in the ```sh/``` and ```ps1\``` directories respectively:
    - ```sh/run.sh``` or ```ps1\run.ps1``` - script file to run the application from the module path
    - ```sh/run-simplified.sh``` or ```ps1\run-simplified.ps1``` - alternative script file to run the application, determines main class from ```SocketClientFX``` module
@@ -44,13 +74,13 @@ Furthermore, additional ```.sh``` and ```.ps1``` files are provided in the ```sh
    - ```sh/create-rpm-installer.sh``` - creates a native Linux RPM installer of this application using JEP-392 jpackage tool
    - ```ps1\create-generic-msi.ps1``` - creates a generic MSI installer of the JDK in use for this build, using the JEP-392 jpackage tool
 
-Notes:
+#### Notes:
    - These scripts have a few available command-line options.  To print out
 the options, add ```-?``` or ```--help``` as an argument to any script.
    - A sample ```Microsoft.PowerShell_profile.ps1``` file has been included to help configure a default Powershell execution environment.  A similar file can be generated specific to environments appropriate for running the ```bash(1)``` shell with a ```.bash_login``` or ```.bash_profile``` file.
 
 
-See also:
+### See also:
 
 - SocketServerFX: https://github.com/jtconnors/SocketServerFX
 - MultiSocketServerFX: https://github.com/jtconnors/MultiSocketServerFX
