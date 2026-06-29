@@ -56,8 +56,8 @@ mvn clean verify -Pjpackage,jpackage-mac-dmg
 mvn clean verify -Pjpackage,jpackage-mac-pkg
 mvn clean verify -Pjpackage,jpackage-linux-deb
 mvn clean verify -Pjpackage,jpackage-linux-rpm
-mvn clean verify -Pjpackage,jpackage-windows-exe
-mvn clean verify -Pjpackage,jpackage-windows-msi
+mvn clean verify "-Pjpackage,jpackage-windows-exe"
+mvn clean verify "-Pjpackage,jpackage-windows-msi"
 ```
 
 ### Avaiable Scripts for MacOS/Linux and Windows
