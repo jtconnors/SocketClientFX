@@ -14,7 +14,6 @@
 #
 Set-Variable -Name EXPECTED_JDK_VERSION -Value "25"
 
-
 #
 # Location of JDK with jpackage utility. This is here for legacy reasons.
 # First prototype required a separate JDK build.  Starting with JDK 14,
@@ -113,8 +112,8 @@ Set-Variable -Name SCRIPT_NAME -Value $MyInvocation.MyCommand.Name
 # Function to print command-line options to standard output
 #
 function Print-Options {
-    Write-Output "usage: ${SCRIPT_NAME} [-?,--help,-e,-n,-v]"
-    Write-Output "  -? or --help - print options to standard output and exit"
+    Write-Output "usage: ${SCRIPT_NAME} [--help,-e,-n,-v]"
+    Write-Output "  --help - print options to standard output and exit"
     Write-Output "  -e - echo the jdk command invocations to standard output"
     Write-Output "  -n - don't run the java commands, just print out invocations"
     Write-Output "  -v - --verbose flag for jdk commands that will accept it"
@@ -124,7 +123,7 @@ function Print-Options {
 # Process command-line arguments:  Not all flags are valid for all invocations,
 # but we'll parse them anyway.
 #
-#   -? or --help  print options to standard output and exit
+#   --help  print options to standard output and exit
 #   -e	echo the jdk command invocations to standard output
 #   -n  don't run the java commands, just print out invocations
 #   -v 	--verbose flag for jdk commands that will accept it
@@ -137,10 +136,6 @@ Set-Variable -Name JUST_EXIT -Value false -Scope Global
 
 Foreach ($arg in $CMDLINE_ARGS) {
     switch ($arg) {
-        '-?' {
-            Print-Options
-            Set-Variable -Name JUST_EXIT -Value true -Scope Global 
-        }
         '--help' {
             Print-Options
             Set-Variable -Name JUST_EXIT -Value true -Scope Global
@@ -215,9 +210,9 @@ if (-not (Test-Path $PROJECTDIR)) {
 # Check if $env:JAVA_HOME is both set and assigned to a valid Path
 #
 if ($env:JAVA_HOME -eq $null) {
-    GoodBye "env:JAVA_HOME Environment Variable is not set. Set the env:JAVA_HOME variable to a vaild JDK runtime location in your Powershell environment or uncomment and edit the 'set-Variable' statement at the beginning of the ps1\env.ps1 file." $LASTEXITCODE 
+    GoodBye "`$env:JAVA_HOME Environment Variable is not set. Set the `$env:JAVA_HOME variable to a vaild JDK runtime location in your Powershell environment or uncomment and edit the 'set-Variable' statement at the beginning of the ps1\env.ps1 file." $LASTEXITCODE 
 } elseif (-not (Test-Path $env:JAVA_HOME)) {
-	GoodBye "Path for Java Home 'env:JAVA_HOME' does not exist. Set the env:JAVA_HOME variable to a vaild JDK runtime location in your Powershell environment or uncomment and edit the 'set-Variable' statement at the beginning of the ps1\env.ps1 file." $LASTEXITCODE 
+	GoodBye "Path for Java Home `$env:JAVA_HOME does not exist. Set the `$env:JAVA_HOME variable to a vaild JDK runtime location in your Powershell environment or uncomment and edit the 'set-Variable' statement at the beginning of the ps1\env.ps1 file." $LASTEXITCODE 
 }
 
 #
@@ -236,7 +231,7 @@ $jdk_version_unfiltered = $java_version_output.Split(" ")[2].split(".-")[0]
 # them for a proper comparison.
 $jdk_version = $jdk_version_unfiltered -replace '["]'
 if ($jdk_version -ne $EXPECTED_JDK_VERSION) {
-    GoodBye "JDK version '$jdk_version' does not match expected version: '$EXPECTED_JDK_VERSION'. JAVA_HOME should be set to a JDK $EXPECTED_JDK_VERSION implementation." $LASTEXITCODE
+    GoodBye "JDK version '$jdk_version' does not match expected version: '$EXPECTED_JDK_VERSION'. `$env:JAVA_HOME should be set to a JDK $EXPECTED_JDK_VERSION implementation." $LASTEXITCODE
 }
 
 cd $PROJECTDIR

@@ -97,7 +97,7 @@ INSTALLER=installer
 
 #
 # Required external modules for this application
-# For JDK 25 javafx modules, make sure to use version 21 or greater
+# For JDK 25 javafx modules, make sure to use version 25 or greater
 #
 EXTERNAL_MODULES=(
     "$REPO/io/github/jtconnors/com.jtconnors.socket/21.0.0/com.jtconnors.socket-21.0.0.jar"
@@ -154,7 +154,6 @@ EXECUTE_OPTION=true
 
 for i in $*
 do
-echo "$i="$i
 	case $i in
 		"--help")
 			print_options
