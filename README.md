@@ -13,6 +13,8 @@ It is typically used in conjucntion with one of two server-side JavaFX UI applic
 or
 ```MultiSocketServerFX``` https://github.com/jtconnors/MultiSocketServerFX
 
+![Alt Text](file:///Socket-client-server.png)
+
 This version of the source code is tagged ```1.1-JDK25-maven```.  As its name suggests, it is specific to JDK 25 and can be built with the ```apache maven``` build lifecycle system. Since JDK 16, the jpackage API has been standardized, and as such the scripts contained in this project could be modified to build with and run with JDKs from JDK 16 onwards.  Subsequent releases to JDK 25 have not been tested with this version of the project. 
 
 This project works on Windows, MacOS or Linux.
